@@ -14,9 +14,13 @@ function App() {
     //* Iterar y buscar el elemento en nuestro carrito de compras
     const itemExists = cart.findIndex( guitar => guitar.id === item.id )
 
-    console.log(itemExists);
+    if(itemExists >= 0){ //* Ya existe
 
-    setCart( prevCart => [...prevCart, item])
+    } else {
+      item.quantity = 1;
+      setCart( [...cart, item]);
+    }
+
   }
 
   return (
