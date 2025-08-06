@@ -13,6 +13,11 @@ function App() {
 
   const MIN_ITEMS = 1;
 
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart])
+  
+
   function addToCart(item) {
 
     //* Iterar y buscar el elemento en nuestro carrito de compras
@@ -27,6 +32,8 @@ function App() {
       item.quantity = 1;
       setCart([...cart, item]);
     }
+
+    saveLocalStorage();
 
   }
 
@@ -62,6 +69,10 @@ function App() {
     setCart(updatedCart);
   }
 
+  function clearCart(){
+    setCart([])
+  }
+
   return (
     <>
 
@@ -70,6 +81,7 @@ function App() {
         removeFromCart={removeFromCart}
         increaseQuantity={increaseQuantity}
         decreaseQuantity={decreaseQuantity}
+        clearCart={clearCart}
       />
 
       <main className="container-xl mt-5">
