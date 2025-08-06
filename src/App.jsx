@@ -9,20 +9,24 @@ function App() {
   const [data, setData] = useState(db);
   const [cart, setCart] = useState([]);
 
-  function addToCart(item){
+  function addToCart(item) {
 
     //* Iterar y buscar el elemento en nuestro carrito de compras
-    const itemExists = cart.findIndex( guitar => guitar.id === item.id )
+    const itemExists = cart.findIndex(guitar => guitar.id === item.id)
 
-    if(itemExists >= 0){ //* Ya existe
+    if (itemExists >= 0) { //* Ya existe
       const updatedCart = [...cart];
       updatedCart[itemExists].quantity++;
       setCart(updatedCart);
     } else {
       item.quantity = 1;
-      setCart( [...cart, item]);
+      setCart([...cart, item]);
     }
 
+  }
+
+  function removeFromCart( id ){
+    setCart(prevCart => prevCart.filter( guitar => guitar.id !== id ))
   }
 
   return (
@@ -30,6 +34,7 @@ function App() {
 
       <Header
         cart={cart}
+        removeFromCart={removeFromCart}
       />
 
       <main className="container-xl mt-5">
